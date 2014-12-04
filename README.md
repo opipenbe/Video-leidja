@@ -1,7 +1,9 @@
 Video-leidja
 ============
 
-Lihtne programm erinevatest videokeskkondadest videote avamiseks VLC-meediaplayeri abil.
+Lihtne Java programm erinevatest videokeskkondadest videote avamiseks VLC-meediaplayeri abil. Võib tööle minna ka teiste programmidega.
+
+Töötab hetkel ainult UNIX operatsioonisüsteemidega. Vajalik on wget programmi olemasolu.
 
 Toetab hetkel:
 
