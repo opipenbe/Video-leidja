@@ -71,7 +71,6 @@ public class Err {
 				break;
 			id = id + tekst[i];
 		}
-		System.out.println("Video ID on: " + id);
 		return id;
 	}
 
@@ -86,8 +85,7 @@ public class Err {
 		String saade = "rtmp://media.err.ee:80/etvsaated/";
 		String arhiiv = "rtmp://media.err.ee:80/arhiiv/";
 		String tulemus = saade;
-		for (int i = 0; i < 20; i++) { // Otsib vastava voo urliga sobivat
-										// serverit
+		for (int i = 0; i < 20; i++) { // Otsib vastava voo urliga server
 			if (link.charAt(i) == 'a' && link.charAt(i + 1) == 'r'
 					&& link.charAt(i + 2) == 'h' && link.charAt(i + 3) == 'i'
 					&& link.charAt(i + 4) == 'i' && link.charAt(i + 5) == 'v') {
@@ -96,7 +94,6 @@ public class Err {
 			}
 		}
 		tulemus = tulemus + leiaVooId();
-		System.out.println("Voo aadress on " + tulemus);
 		return tulemus;
 	}
 

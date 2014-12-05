@@ -4,7 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Generic class. P6hiline class tuvastamata videote jaoks.
+ * Generic class. P6hiline class tuvastamata videote leidmiseks (ei ole err,
+ * kanal2, tv3).
  *
  * @version 0.1
  * @author Olari Pipenberg
@@ -113,10 +114,6 @@ public class Generic {
 		return max;
 	}
 
-	public static int Kontroll() {
-		return 0;// TODO
-	}
-
 	/**
 	 * Meetod leiaVoog.
 	 * 
@@ -130,25 +127,50 @@ public class Generic {
 		for (int i = min; i < max + 1; i++) {
 			voog = voog + m[i];
 		}
-		System.out.println(voog);
 		return voog;
 	}
 
 	/**
+	 * Meetod nimega eiT22ta. Kontrollib voo linki.
+	 * 
+	 * @param voog
+	 *            parameetriks on sisestatud voo aadress
+	 * @return tagastab 0, kui l2bib kontrolli
+	 */
+	public static int eiT22ta(String voog) {
+		int kontroll = 0;
+		for (int i = 0; i < voog.length(); i++) {
+			if (voog.charAt(i) == '!' || voog.charAt(i) == '<'
+					|| voog.charAt(i) == '>') {
+				kontroll = 1;
+			}
+		}
+		return kontroll;
+	}
+
+	/**
 	 * Meetod k2ivita. K2ivitab m2ngija koos vajaliku aadressiga
+	 * 
 	 * @param voog
 	 *            v6tab parameetriks sisestatud video aadressi
 	 */
 
 	public static void k2ivita(String voog) {
+
 		try {
-			System.out.println("K2ivitan VLC-programmi!");
-			Runtime rt = Runtime.getRuntime();
-			Process proc = rt.exec("vlc " + voog);
-			proc.waitFor();
+			if (eiT22ta(voog) == 0) {
+				System.out.println("Voo url on " + voog);
+				Runtime rt = Runtime.getRuntime();
+				Process proc = rt.exec("vlc " + voog); // K2ivitab VLC
+				proc.waitFor();
+			} else {
+				System.out.println("Programm ei toeta seda lehte!");
+			}
 		} catch (Throwable t) {
 			t.printStackTrace();
+
 		}
+
 	}
 
 }

@@ -33,7 +33,7 @@ public class Url {
 			if (url.charAt(i) == 't' && url.charAt(i + 1) == 'v'
 					&& url.charAt(i + 2) == '3') { // kui on tv3
 				tulemus = 1;
-				tv3(url);
+				tv3Play(url);
 				break;
 			}
 		}
@@ -53,7 +53,7 @@ public class Url {
 		Generic.k2ivita(errObject.leiaVoog());
 	}
 
-	public static void tv3(String sisestus) {
+	public static void tv3Play(String sisestus) {
 
 	}
 
