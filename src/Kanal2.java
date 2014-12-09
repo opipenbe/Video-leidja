@@ -21,15 +21,9 @@ public class Kanal2 {
 		link = sisestus;
 	}
 
-	/**
-	 * Meetod laeAlla. Teeb uue Allalaadimise objekti ja v6imaldab
-	 * allalaadimise.
-	 * 
-	 */
-	public void laeAlla() {
+	public String getLink() {
 		String leheapi = "http://kanal2.ee/video/playerPlaylistApi/?id=";
-		Allalaadimine wgetObject = new Allalaadimine(leheapi + leiaId(link));
-		wgetObject.wget();
+		return leheapi + leiaId(link);
 	}
 
 	/**
@@ -46,7 +40,6 @@ public class Kanal2 {
 				break;
 			id = numbrid + id;
 		}
-		System.out.println("Video API ID on " + id);
 		return id;
 	}
 
@@ -56,8 +49,8 @@ public class Kanal2 {
 	 * @return tagastab esimese voo ID m2rgi asukoha
 	 * @throws IOException
 	 */
-	public static int vooIdMin() throws IOException {
-		char tekst[] = Generic.tekstMassiiviks();
+	public int vooIdMin() throws IOException {
+		char tekst[] = Generic.tekstMassiiviks(getLink());
 		int asukoht = 0;
 		for (int i = 0; i < tekst.length; i++) {
 			if (tekst[i] == 'k' && tekst[i + 1] == '2' && tekst[i + 2] == 'l'
@@ -75,9 +68,9 @@ public class Kanal2 {
 	 * @return tagastab voo ID
 	 * @throws IOException
 	 */
-	public static String leiaVooId() throws IOException {
+	public String leiaVooId() throws IOException {
 		String id = "";
-		char tekst[] = Generic.tekstMassiiviks();
+		char tekst[] = Generic.tekstMassiiviks(getLink());
 		int algus = vooIdMin();
 		for (int i = algus; i < tekst.length; i++) {
 			if (tekst[i] == '"')
@@ -94,10 +87,9 @@ public class Kanal2 {
 	 * @return tagastab voo aadressi, mida saab k2ivitada pleieriga
 	 * @throws IOException
 	 */
-	public static String leiaVoog() throws IOException {
+	public String leiaVoog() throws IOException {
 		String server = "rtmp://kanal2-egress.cdn.mind.ee/kanal2vod//";
 		String voog = server + leiaVooId();
-		System.out.println("Video link on " + voog);
 		return voog;
 	}
 }

@@ -1,12 +1,13 @@
 /**
  * Allalaadimise class. Laeb alla videot sisaldava lehe.
+ * SEDA KLASSI ENAM EI KASUTATA!!!
  *
  * @version 0.1
  * @author Olari Pipenberg
  * @since 1.7
  */
 
-public class Allalaadimine { // TODO v6iks olla tulevikus java lahendus
+public class Allalaadimine { 
 
 	private String link;
 

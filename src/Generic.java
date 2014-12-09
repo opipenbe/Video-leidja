@@ -1,38 +1,18 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * Generic class. P6hiline class tuvastamata videote leidmiseks (ei ole err,
  * kanal2, tv3).
  *
- * @version 0.1
+ * @version 0.2
  * @author Olari Pipenberg
  * @since 1.7
  */
 
 public class Generic {
-	private String link;
-
-	/**
-	 * Konstruktor Generic classile.
-	 * 
-	 * @param sisestus
-	 *            v6tab parameetriks sisestatud urli
-	 */
-	public Generic(String sisestus) {
-		link = sisestus;
-	}
-
-	/**
-	 * Meetod laeAlla. Teeb uue Allalaadimise objekti ja v6imaldab
-	 * allalaadimise.
-	 */
-	public void laeAlla() {
-		Allalaadimine wgetObject = new Allalaadimine(link);
-		wgetObject.wget();
-	}
 
 	/**
 	 * Meetod tekstMassiivks. Loeb faili ja lisab sisalduvad m2rgid massiivi.
@@ -40,13 +20,16 @@ public class Generic {
 	 * @return tagastab m2rkide massiivi
 	 * @throws IOException
 	 */
-	public static char[] tekstMassiiviks() throws IOException {
-		File file = new File("fail");
-		BufferedReader buffer = new BufferedReader(new FileReader(file));
+
+	public static char[] tekstMassiiviks(String link) throws IOException {
+
+		URL oracle = new URL(link);
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				oracle.openStream()));
 		int c = 0;
 		char m[] = new char[500000];
 		int i = 0;
-		while ((c = buffer.read()) != -1) { // lisab massiivi t2ht t2he haaval
+		while ((c = in.read()) != -1) { // lisab massiivi t2ht t2he haaval
 			char character = (char) c;
 			m[i] = character;
 			i++;
@@ -90,12 +73,11 @@ public class Generic {
 				break;
 			}
 		}
-		System.out.println("URLi algus " + min);
 		return min;
 	}
 
 	/**
-	 * Meetod maxPunkt. Leiab urli alguse.
+	 * Meetod maxPunkt. Leiab urli l6pu.
 	 * 
 	 * @param m
 	 *            v6tab parameetriks sisestatud faili m2rkide massiivi
@@ -110,7 +92,6 @@ public class Generic {
 				break;
 			}
 		}
-		System.out.println("URLi l6pp " + max);
 		return max;
 	}
 
@@ -122,8 +103,8 @@ public class Generic {
 	 */
 	public static String leiaVoog(char m[]) {
 		String voog = "";
-		int max = maxPunkt(m);
 		int min = minPunkt(m);
+		int max = maxPunkt(m);
 		for (int i = min; i < max + 1; i++) {
 			voog = voog + m[i];
 		}
@@ -163,8 +144,6 @@ public class Generic {
 				Runtime rt = Runtime.getRuntime();
 				Process proc = rt.exec("vlc " + voog); // K2ivitab VLC
 				proc.waitFor();
-			} else {
-				System.out.println("Programm ei toeta seda lehte!");
 			}
 		} catch (Throwable t) {
 			t.printStackTrace();

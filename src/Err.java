@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * ERR videote class.
  *
- * @version 0.1
+ * @version 0.2
  * @author Olari Pipenberg
  * @since 1.7
  */
@@ -26,24 +26,14 @@ public class Err {
 	}
 
 	/**
-	 * Meetod laeAlla. Teeb uue Allalaadimise objekti ja v6imaldab
-	 * allalaadimise.
-	 * 
-	 */
-	public void laeAlla() {
-		Allalaadimine wgetObject = new Allalaadimine(link);
-		wgetObject.wget();
-	}
-
-	/**
 	 * Meetod fileIdMin. Otsib allalaetud failis voo ID esimese m2rgi asukoha.
 	 * 
 	 * @return tagastab voo ID alguse
 	 * @throws IOException
 	 */
 
-	public static int fileIdMin() throws IOException {
-		char tekst[] = Generic.tekstMassiiviks();
+	public int fileIdMin() throws IOException {
+		char tekst[] = Generic.tekstMassiiviks(getLink());
 		int asukoht = 0;
 		for (int i = 0; i < tekst.length; i++) {
 			if (tekst[i] == 'f' && tekst[i + 1] == 'i' && tekst[i + 2] == 'l'
@@ -62,9 +52,9 @@ public class Err {
 	 * @throws IOException
 	 */
 
-	public static String leiaVooId() throws IOException {
+	public String leiaVooId() throws IOException {
 		String id = "mp4:";
-		char tekst[] = Generic.tekstMassiiviks();
+		char tekst[] = Generic.tekstMassiiviks(getLink());
 		int algus = fileIdMin();
 		for (int i = algus; i < tekst.length; i++) {
 			if (tekst[i] == '&')

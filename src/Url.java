@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * Url klass. Uurib kasutaja sisestatud linki.
  *
- * @version 0.1
+ * @version 0.2
  * @author Olari Pipenberg
  * @since 1.7
  */
@@ -37,19 +37,20 @@ public class Url {
 				break;
 			}
 		}
-		if (tulemus == 0) // kui ei leia, siis kasutab yldist v6imalust
-			yldine(url);
+		if (tulemus == 0) { // kui ei leia, siis kasutab yldist v6imalust
+			yldineMp4(url);
+			yldineRtmp(url);
+		}
+
 	}
 
 	public static void kanal2(String sisestus) throws IOException {
 		Kanal2 kanal2Obj = new Kanal2(sisestus);
-		kanal2Obj.laeAlla();
-		Generic.k2ivita(Kanal2.leiaVoog());
+		Generic.k2ivita(kanal2Obj.leiaVoog());
 	}
 
 	public static void err(String sisestus) throws IOException {
 		Err errObject = new Err(sisestus);
-		errObject.laeAlla();
 		Generic.k2ivita(errObject.leiaVoog());
 	}
 
@@ -57,9 +58,13 @@ public class Url {
 
 	}
 
-	public static void yldine(String sisestus) throws IOException {
-		Generic genericObj = new Generic(sisestus);
-		genericObj.laeAlla();
-		Generic.k2ivita(Generic.leiaVoog(Generic.tekstMassiiviks()));
+	public static void yldineMp4(String sisestus) throws IOException {
+		Generic.k2ivita(Generic.leiaVoog(Generic.tekstMassiiviks(sisestus)));
+	}
+
+	public static void yldineRtmp(String sisestus) throws IOException {
+		Rtmp RtmpObj = new Rtmp(sisestus);
+		Generic.k2ivita(RtmpObj.leiaVoog());
+
 	}
 }

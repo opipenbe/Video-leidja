@@ -13,6 +13,7 @@ import java.io.IOException;
  * http://arhiiv.err.ee/vaata/etv-kuld-pop-3
  * http://kanal2.ee/pluss/closed?id=23662
  * http://arhiiv.err.ee/vaata/see-vana-hea-dixi/latest
+ * http://alfabass.at.ua/index/temptation/0-32
  */
 public class Main {
 
@@ -20,7 +21,6 @@ public class Main {
 		System.out.println("Sisesta link");
 		String kasutaja = TextIO.getlnString();
 		Url.uuriLinki(kasutaja);
-		
 
 	}
 
